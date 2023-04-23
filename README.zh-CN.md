@@ -4,7 +4,7 @@
 
 [中文](README.zh-CN.md)\|[英语](README.md)\|[日本人](README.ja.md)\|[俄语](README.ru.md)
 
--   使用谷歌翻译
+-   using google translate
     -   将结果缓存在`json`文件
 -   支持多线程
 -   支持多种语言
@@ -12,7 +12,7 @@
     -   `txt`: 一行一个字`=`
     -   `csv`: 一行一个字`,`
     -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
-    -   `txt` is higher priority than csv and google translate cache
+    -   `txt`优先级高于 csv 和谷歌翻译缓存
 
 ## 谷歌翻译支持语言
 
