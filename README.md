@@ -156,3 +156,15 @@ t.save_cache()
 # dump cache to json
 t.dump_cache()
 ```
+
+## example
+
+* translate tags from `en` to `zh-cn`
+* `zh-CN.txt` for booru_dataset_tag_manager_translate
+* `danbooru-zh-CN.csv` for a1111-sd-webui-tagcomplete 
+
+
+``` bash
+mkdir data
+python booru_translate.py
+```

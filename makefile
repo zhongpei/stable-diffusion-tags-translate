@@ -6,7 +6,7 @@ env:
 
 gen:
 	python better_prompt_translate.py
-	python booru_dataset_tag_manager_translate.py
+	python booru_translate.py
 
 gen-no-google:
-	export USE_GOOGLE_TRANSLATE=false && python better_prompt_translate.py && python booru_dataset_tag_manager_translate.py
+	export USE_GOOGLE_TRANSLATE=false && python better_prompt_translate.py && python booru_translate.py
