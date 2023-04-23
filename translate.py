@@ -100,6 +100,13 @@ class Translate(object):
 
         if not self.enable_google_translate:
             return None
+
+        if isinstance(txt, list) and len(txt) == 0:
+            return []
+
+        if isinstance(txt, str) and len(txt) == 0:
+            return ""
+
         try:
             result = self.translator.translate(txt, src=src, dest=dest)
             if isinstance(result, list):
@@ -122,10 +129,10 @@ class Translate(object):
 
         result_dict = {}
         result_dict.update({txt: self.cache[txt] for txt in txt_list if txt in self.cache})
+
         need_translate = [txt for txt in txt_list if txt not in self.cache]
-
         translate_result = self.google_translate(need_translate, self.lang_src, self.lang_dest)
-
+        print(f"google translate result: {translate_result}, need: {need_translate}")
         if translate_result is not None:
             if len(translate_result) != len(need_translate):
                 print(f"translate result length not match: {len(translate_result)} != {len(need_translate)}")
@@ -136,6 +143,8 @@ class Translate(object):
                 self.cache.update(result_dict)
                 self.google_cache.update(result_dict)
                 self.google_cache_changed = True
+        else:
+            result_dict.update({txt: None for txt in need_translate})
 
         return [result_dict[txt] for txt in txt_list]
 
