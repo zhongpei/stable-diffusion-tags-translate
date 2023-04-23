@@ -13,11 +13,11 @@ class Translate(object):
         if not os.path.exists(self.lang_dir):
             os.mkdir(self.lang_dir)
 
-        google_dir = os.path.join(self.lang_dir, "google")
-        if not os.path.exists(google_dir):
-            os.mkdir(google_dir)
+        self.google_dir = os.path.join(self.lang_dir, "google")
+        if not os.path.exists(self.google_dir):
+            os.mkdir(self.google_dir)
 
-        self.google_cache_file = os.path.join(google_dir, f"google_cache_{src}_{dest}.json")
+        self.google_cache_file = os.path.join(self.google_dir, f"google_cache_{src}_{dest}.json")
 
         print(googletrans.LANGUAGES)
         self.enable_google_translate = enable_google_translate
@@ -34,14 +34,16 @@ class Translate(object):
         print(f"Loaded {len(self.cache)} translations")
 
     def load_google_cache(self):
+
         if not os.path.exists(self.google_cache_file):
             with open(self.google_cache_file, "w+", encoding="UTF-8") as f:
                 f.write("{}")
         if not os.path.exists(self.google_cache_file):
             return {}
-        with open(self.google_cache_file, encoding="UTF-8") as f:
-            cache = json.load(f)
-        print(f"Loaded {len(cache)} google cache")
+        for fn in os.listdir(self.google_dir):
+            with open(os.path.join(self.google_dir, fn), encoding="UTF-8") as f:
+                cache = json.load(f)
+            print(f"Loaded {len(cache)} from {fn}")
         return cache
 
     def load_csv_cache(self):
@@ -91,7 +93,7 @@ class Translate(object):
             return None
         try:
             result = self.translator.translate(txt, src=src, dest=dest)
-            print(f"{txt} -> {result.text}")
+            print(f"google: {txt} -> {result.text}")
             return result.text
         except Exception as e:
             print(e)
@@ -100,6 +102,7 @@ class Translate(object):
     def translate(self, txt):
         if txt in self.cache:
             return self.cache[txt]
+
         result = self.google_translate(txt, self.lang_src, self.lang_dest)
         if result is not None:
             with self.lock:
