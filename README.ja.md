@@ -2,19 +2,29 @@
 
 安定した拡散タグを翻訳する
 
-[中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)\|[ロシア](README.ru.md)
+[中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)｜[ロシア](README.ru.md)
 
--   using google translate
+-   グーグル翻訳を使って
     -   結果をキャッシュする`json`ファイル
--   support multi-threading
--   support many languages
+-   マルチスレッドをサポート
+-   多くの言語をサポート
 -   キャッシュファイルの手動編集をサポート (txt、csv)
     -   `txt`: 1 行 1 語で`=`
     -   `csv`: 1 行 1 語で`,`
     -   `txt`、`csv`,グーグルキャッシュ(`json`）併用可能
     -   `txt`csv や Google 翻訳のキャッシュよりも優先度が高い
 
-## google translate support languages
+## リリース
+
+ダウンロード[中国語翻訳タグ(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
+
+-   `zh-CN.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+-   `zh-CN-min.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+    -   (高速起動用の小さなファイル)
+    -   に改名してください`zh-CN.txt`
+-   `danbooru-zh-CN.csv`ために[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
+
+## Google 翻訳のサポート言語
 
 <details>
 <summary>google translate support languages</summary>
@@ -159,7 +169,7 @@ t.dump_cache()
 ## 例
 
 -   タグを翻訳`en`に`zh-cn`
--   `zh-CN.txt` for booru_dataset_tag_manager_translate
+-   `zh-CN.txt`booru_dataset_tag_manager_translate の場合
 -   `danbooru-zh-CN.csv`a1111-sd-webui-tagcomplete の場合
 
 ```bash
