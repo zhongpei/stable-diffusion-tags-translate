@@ -2,19 +2,19 @@
 
 安定した拡散タグを翻訳する
 
-[中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)｜[ロシア](README.ru.md)
+[中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)\|[ロシア](README.ru.md)
 
--   グーグル翻訳を使って
+-   using google translate
     -   結果をキャッシュする`json`ファイル
--   マルチスレッドをサポート
--   多くの言語をサポート
+-   support multi-threading
+-   support many languages
 -   キャッシュファイルの手動編集をサポート (txt、csv)
     -   `txt`: 1 行 1 語で`=`
     -   `csv`: 1 行 1 語で`,`
     -   `txt`、`csv`,グーグルキャッシュ(`json`）併用可能
     -   `txt`csv や Google 翻訳のキャッシュよりも優先度が高い
 
-## Google 翻訳のサポート言語
+## google translate support languages
 
 <details>
 <summary>google translate support languages</summary>
@@ -159,7 +159,7 @@ t.dump_cache()
 ## 例
 
 -   タグを翻訳`en`に`zh-cn`
--   `zh-CN.txt`booru_dataset_tag_manager_translate の場合
+-   `zh-CN.txt` for booru_dataset_tag_manager_translate
 -   `danbooru-zh-CN.csv`a1111-sd-webui-tagcomplete の場合
 
 ```bash
