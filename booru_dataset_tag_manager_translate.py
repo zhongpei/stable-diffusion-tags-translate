@@ -17,7 +17,7 @@ def translate(tag_type=None, output_file="./data/zh-CN.txt"):
 
     t = Translate(src="en", dest="zh-cn")
     tags_dict = {}
-    bz = 100
+    bz = 1000
     for i in range(0, len(tags), bz):
         result_len = len(tags[i:i + bz])
         result = t.translate(tags[i:i + bz])

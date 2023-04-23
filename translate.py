@@ -2,7 +2,7 @@ import json
 import googletrans
 import os
 import threading
-from typing import List
+from typing import List, Dict
 
 USE_GOOGLE_TRANSLATE = os.environ.get("USE_GOOGLE_TRANSLATE", "true").lower() == "true"
 CACHE_ROOT_PATH = "./cache/"
@@ -39,7 +39,17 @@ class Translate(object):
         self.cache.update(self.google_cache)
         self.cache.update(self._load_csv_cache())
         self.cache.update(self._load_txt_cache())
+
+        # self.cache = self._fix_cache(self.cache)
         print(f"Loaded {len(self.cache)} translations")
+
+    @staticmethod
+    def _fix_cache(cache: Dict[str, str]) -> Dict[str, str]:
+        new_cache = {}
+        for k, v in cache.items():
+            if k != v:
+                new_cache.update({k.strip(): v.strip()})
+        return new_cache
 
     def _load_google_cache(self):
 
@@ -74,7 +84,7 @@ class Translate(object):
 
     @staticmethod
     def _fix_tags(text: str) -> str:
-        text.replace("_", " ").strip()
+        text = text.replace("_", " ").strip()
         return text
 
     def _load_txt_cache(self):
@@ -120,6 +130,12 @@ class Translate(object):
             return None
 
     def translate(self, txt: str | List[str]) -> str | List[str] | None:
+        if self.lang_src == self.lang_dest:
+            return txt
+
+        if txt is None:
+            return None
+
         if isinstance(txt, list):
             return self._translate_list(txt)
         return self._translate(txt)
@@ -140,6 +156,7 @@ class Translate(object):
             result_dict.update({need_translate[i]: translate_result[i] for i in range(len(translate_result))})
 
             with self.lock:
+                print(f"update cache {len(result_dict)}")
                 self.cache.update(result_dict)
                 self.google_cache.update(result_dict)
                 self.google_cache_changed = True
@@ -171,6 +188,7 @@ class Translate(object):
         with self.lock:
             with open(self.google_cache_file, "w+", encoding="UTF-8") as f:
                 f.write(json.dumps(self.google_cache, ensure_ascii=False, indent=4))
+            print(f"Saved {len(self.google_cache)} to {self.google_cache_file}...")
             self.google_cache_changed = False
 
 
