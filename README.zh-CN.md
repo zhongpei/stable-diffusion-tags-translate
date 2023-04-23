@@ -11,7 +11,7 @@
 -   支持手动编辑缓存文件(txt,csv)
     -   `txt`: 一行一个字`=`
     -   `csv`: 一行一个字`,`
-    -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
+    -   `txt`,`csv`,谷歌缓存(`json`) 可以一起使用
     -   `txt`优先级高于 csv 和谷歌翻译缓存
 
 ## 谷歌翻译支持语言
@@ -154,4 +154,15 @@ t.save_cache()
 
 # dump cache to json
 t.dump_cache()
+```
+
+## 例子
+
+-   翻译标签来自`en`到`zh-cn`
+-   `zh-CN.txt`对于 booru_dataset_tag_manager_translate
+-   `danbooru-zh-CN.csv`对于 a1111-sd-webui-tagcomplete
+
+```bash
+mkdir data
+python booru_translate.py
 ```
