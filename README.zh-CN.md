@@ -4,7 +4,7 @@
 
 [中文](README.zh-CN.md)\|[英语](README.md)\|[日本人](README.ja.md)\|[俄语](README.ru.md)
 
--   using google translate
+-   使用谷歌翻译
     -   将结果缓存在`json`文件
 -   支持多线程
 -   支持多种语言
