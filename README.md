@@ -15,6 +15,16 @@ tanslate stable diffusion tags
     * `txt`,`csv`,google cache(`json`) can be used together
     * `txt` is higher priority than csv and google translate cache
 
+## Realases
+
+Download [Chinese translate tags(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
+
+* `zh-CN.txt` for [BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+* `zh-CN-min.txt` for [BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager) 
+  * (small file for speed launch)
+  * please rename to `zh-CN.txt`
+* `danbooru-zh-CN.csv` for [a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
+
 ## google translate support languages
 
 <details>
@@ -156,9 +166,6 @@ t.save_cache()
 # dump cache to json
 t.dump_cache()
 ```
-
-
-
 
 
 ## example
