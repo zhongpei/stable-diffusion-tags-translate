@@ -2,7 +2,7 @@
 
 翻译稳定扩散标签
 
-[中文](README.zh.md)\|[英语](README.md)\|[日本人](README.ja.md)\|[俄语](README.ru.md)
+[中文](README.zh-CN.md)\|[英语](README.md)\|[日本人](README.ja.md)\|[俄语](README.ru.md)
 
 -   使用谷歌翻译
     -   将结果缓存在`json`文件
@@ -136,7 +136,7 @@
 
 ## 用法
 
-translate.朋友
+translate.py
 
 ```python
 from translate import Translate
