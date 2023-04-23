@@ -38,13 +38,13 @@ def translate(tag_type=None, output_file="./data/zh-CN.txt"):
 if __name__ == "__main__":
     # booru_dataset_tag_manager_translate
     result_list = translate("0")
-    with open("./data/zh-CN-min.txt", "w+") as f:
+    with open("./data/zh-CN-min.txt", "w+", encoding='utf-8') as f:
         f.write("\n".join(f"{x[0]}={x[1]}" for x in result_list))
 
     result_list = translate()
-    with open("./data/zh-CN.txt", "w+") as f:
+    with open("./data/zh-CN.txt", "w+", encoding='utf-8') as f:
         f.write("\n".join(f"{x[0]}={x[1]}" for x in result_list))
 
     # a1111-sd-webui-tagcomplete
-    with open("./data/danbooru-zh-CN.csv", "w+") as f:
+    with open("./data/danbooru-zh-CN.csv", "w+", encoding='utf-8') as f:
         f.write("\n".join(f"{x[0]},{x[1]}" for x in result_list))
