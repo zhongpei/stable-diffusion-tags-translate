@@ -14,6 +14,16 @@
     -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
     -   `txt`优先级高于 csv 和谷歌翻译缓存
 
+## 发布
+
+下载[中文翻译标签(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
+
+-   `zh-CN.txt`为了[Booru数据集标签管理器](https://github.com/starik222/BooruDatasetTagManager)
+-   `zh-CN-min.txt`为了[Booru数据集标签管理器](https://github.com/starik222/BooruDatasetTagManager)
+    -   （用于快速启动的小文件）
+    -   请重命名为`zh-CN.txt`
+-   `danbooru-zh-CN.csv`为了[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
+
 ## 谷歌翻译支持语言
 
 <details>
