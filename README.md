@@ -2,7 +2,7 @@
 
 tanslate stable diffusion tags
 
-[中文](README.zh.md)|[English](README.md)|[日本語](README.ja.md)|[Russian](README.ru.md)
+[中文](README.zh-CN.md)|[English](README.md)|[日本語](README.ja.md)|[Russian](README.ru.md)
 
 
 * using google translate

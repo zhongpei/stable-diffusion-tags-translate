@@ -99,7 +99,7 @@ class Translate(object):
             print(e)
             return None
 
-    def translate(self, txt):
+    def translate(self, txt: str) -> str | None:
         if txt in self.cache:
             return self.cache[txt]
 
