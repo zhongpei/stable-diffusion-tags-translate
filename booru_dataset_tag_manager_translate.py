@@ -11,7 +11,7 @@ def translate():
             tag = l.split(",")[0].strip()
             tags.append(tag)
 
-    t = Translate(src="en", dest="zh-cn", enable_google_translate=False)
+    t = Translate(src="en", dest="zh-cn")
     tags_dict = {}
     for tag in tags:
         result = t.translate(tag)

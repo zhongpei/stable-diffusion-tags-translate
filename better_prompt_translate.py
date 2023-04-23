@@ -4,13 +4,27 @@ from translate import Translate
 
 
 def translate_json():
-    translator = Translate(src="en", dest="zh-cn", enable_google_translate=False)
+    translator = Translate(src="en", dest="zh-cn")
 
     with open("./data/danbooru-tags.json", encoding="UTF-8") as f:
         tags = json.load(f)
     print(f"Loaded {len(tags)} tags")
     count = 0
     translate_count = 0
+    fix_tag_names = [tag["name"].replace("_", " ") for tag in tags]
+    bz = 100
+    for i in range(0, len(fix_tag_names), bz):
+        result_len = len(fix_tag_names[i:i + bz])
+        result = translator.translate(fix_tag_names[i:i + bz])
+        if result is not None:
+            for j in range(result_len):
+                tags[i + j]["zh_cn"] = result[j]
+        else:
+            for j in range(result_len):
+                tags[i + j]["zh_cn"] = ""
+        print(f"Translated {i} tags -> {result}")
+        translator.save_cache()
+
     for tag in tags:
         tag_name = copy.copy(tag["name"]).replace("_", " ")
         text = translator.translate(tag_name)
