@@ -155,3 +155,14 @@ t.save_cache()
 # dump cache to json
 t.dump_cache()
 ```
+
+## 例
+
+-   タグを翻訳`en`に`zh-cn`
+-   `zh-CN.txt`booru_dataset_tag_manager_translate の場合
+-   `danbooru-zh-CN.csv`a1111-sd-webui-tagcomplete の場合
+
+```bash
+mkdir data
+python booru_translate.py
+```
