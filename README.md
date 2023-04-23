@@ -6,14 +6,14 @@ tanslate stable diffusion tags
 
 
 * using google translate
-    * cache the result in json file
+    * cache the result in `json` file
 * support multi-threading
 * support many languages
 * support edit cache file manually(txt,csv)
-    * txt: one line one word with "="
-    * csv: one line one word with ","
-    * txt,csv,google cache(json) can be used together
-    * txt is higher priority than csv and google translate cache
+    * `txt`: one line one word with `=`
+    * `csv`: one line one word with `,`
+    * `txt`,`csv`,google cache(`json`) can be used together
+    * `txt` is higher priority than csv and google translate cache
 
 ## google translate support languages
 
