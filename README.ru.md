@@ -4,7 +4,7 @@
 
 [Китайский](README.zh-CN.md)\|[Английский](README.md)\|[Японский](README.ja.md)\|[Русский](README.ru.md)
 
--   используя гугл переводчик
+-   с помощью гугл переводчика
     -   кэшировать результат в`json`файл
 -   поддержка многопоточности
 -   поддержка многих языков
@@ -154,4 +154,15 @@ t.save_cache()
 
 # dump cache to json
 t.dump_cache()
+```
+
+## пример
+
+-   перевести теги из`en`к`zh-cn`
+-   `zh-CN.txt`для booru_dataset_tag_manager_translate
+-   `danbooru-zh-CN.csv`для a1111-sd-webui-tagcomplete
+
+```bash
+mkdir data
+python booru_translate.py
 ```
