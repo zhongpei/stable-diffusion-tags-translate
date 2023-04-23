@@ -146,5 +146,12 @@ t = Translate('en', 'zh-cn')
 print(t.translate("1girl"))
 print(t.translate("hello"))
 
+# batch translate
+print(t.translate(["hello world", "say goodbye"]))
+
+# save cache
 t.save_cache()
+
+# dump cache to json
+t.dump_cache()
 ```

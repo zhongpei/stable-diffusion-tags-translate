@@ -12,7 +12,7 @@
     -   `txt`: 一行一个字`=`
     -   `csv`: 一行一个字`,`
     -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
-    -   `txt`优先级高于 csv 和谷歌翻译缓存
+    -   `txt` is higher priority than csv and google translate cache
 
 ## 谷歌翻译支持语言
 
@@ -136,7 +136,7 @@
 
 ## 用法
 
-translate.py
+translate.朋友
 
 ```python
 from translate import Translate
@@ -146,5 +146,12 @@ t = Translate('en', 'zh-cn')
 print(t.translate("1girl"))
 print(t.translate("hello"))
 
+# batch translate
+print(t.translate(["hello world", "say goodbye"]))
+
+# save cache
 t.save_cache()
+
+# dump cache to json
+t.dump_cache()
 ```
