@@ -2,7 +2,7 @@
 
 安定した拡散タグを翻訳する
 
-[中文](README.zh.md)｜[英語](README.md)｜[日本語](README.ja.md)｜[ロシア](README.ru.md)
+[中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)｜[ロシア](README.ru.md)
 
 -   グーグル翻訳を使って
     -   結果をキャッシュする`json`ファイル
