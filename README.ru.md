@@ -2,10 +2,10 @@
 
 перевести стабильные диффузионные теги
 
-[Китайский](README.zh-CN.md)\|[English](README.md)\|[Японский](README.ja.md)\|[Русский](README.ru.md)
+[Китайский](README.zh-CN.md)\|[Английский](README.md)\|[Японский](README.ja.md)\|[Русский](README.ru.md)
 
--   используя гугл переводчик
-    -   кэшировать результат в`json`файл
+-   с помощью гугл переводчика
+    -   кэшировать результат в`json` file
 -   поддержка многопоточности
 -   поддержка многих языков
 -   поддержка редактирования файла кеша вручную (txt, csv)
@@ -146,5 +146,12 @@ t = Translate('en', 'zh-cn')
 print(t.translate("1girl"))
 print(t.translate("hello"))
 
+# batch translate
+print(t.translate(["hello world", "say goodbye"]))
+
+# save cache
 t.save_cache()
+
+# dump cache to json
+t.dump_cache()
 ```
