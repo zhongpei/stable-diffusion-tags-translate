@@ -21,7 +21,7 @@
 -   `zh-CN.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
 -   `zh-CN-min.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (高速起動用の小さなファイル)
-    -   に改名してください`zh-CN.txt`
+    -   please rename to `zh-CN.txt`
 -   `danbooru-zh-CN.csv`ために[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
 
 ## Google 翻訳のサポート言語
