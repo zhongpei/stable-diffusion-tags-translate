@@ -170,7 +170,7 @@ t.dump_cache()
 
 -   перевести теги из`en`к`zh-cn`
 -   `zh-CN.txt`для booru_dataset_tag_manager_translate
--   `danbooru-zh-CN.csv` for a1111-sd-webui-tagcomplete 
+-   `danbooru-zh-CN.csv`для a1111-sd-webui-tagcomplete
 
 ```bash
 mkdir data
