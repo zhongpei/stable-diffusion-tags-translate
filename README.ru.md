@@ -14,6 +14,16 @@
     -   `txt`,`csv`,кеш гугла(`json`) можно использовать вместе
     -   `txt`имеет более высокий приоритет, чем csv и кэш перевода google
 
+## Релизы
+
+Скачать[Китайские теги перевода(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
+
+-   `zh-CN.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+-   `zh-CN-min.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+    -   (небольшой файл для быстрого запуска)
+    -   пожалуйста, переименуйте в`zh-CN.txt`
+-   `danbooru-zh-CN.csv`для[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
+
 ## языки поддержки гугл переводчик
 
 <details>
@@ -160,7 +170,7 @@ t.dump_cache()
 
 -   перевести теги из`en`к`zh-cn`
 -   `zh-CN.txt`для booru_dataset_tag_manager_translate
--   `danbooru-zh-CN.csv`для a1111-sd-webui-tagcomplete
+-   `danbooru-zh-CN.csv` for a1111-sd-webui-tagcomplete 
 
 ```bash
 mkdir data
