@@ -11,7 +11,7 @@
 -   キャッシュファイルの手動編集をサポート (txt、csv)
     -   `txt`: 1 行 1 語で`=`
     -   `csv`: 1 行 1 語で`,`
-    -   `txt`、`csv`,グーグルキャッシュ(`json`）併用可能
+    -   `txt`、`csv`,グーグルキャッシュ(`json`) 併用可能
     -   `txt`csv や Google 翻訳のキャッシュよりも優先度が高い
 
 ## リリース
@@ -21,7 +21,7 @@
 -   `zh-CN.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
 -   `zh-CN-min.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (高速起動用の小さなファイル)
-    -   please rename to `zh-CN.txt`
+    -   に改名してください`zh-CN.txt`
 -   `danbooru-zh-CN.csv`ために[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
 
 ## Google 翻訳のサポート言語
