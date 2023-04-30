@@ -1,6 +1,6 @@
 # 稳定扩散标签翻译
 
-翻译稳定扩散标签
+翻译稳定扩散提示标签
 
 [中文](README.zh-CN.md)\|[英语](README.md)\|[日本人](README.ja.md)\|[俄语](README.ru.md)
 
