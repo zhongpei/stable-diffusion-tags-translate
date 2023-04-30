@@ -5,7 +5,7 @@ import threading
 from typing import List, Dict
 
 USE_GOOGLE_TRANSLATE = os.environ.get("USE_GOOGLE_TRANSLATE", "true").lower() == "true"
-CACHE_ROOT_PATH = "./cache/"
+CACHE_ROOT_PATH = os.environ.get("TRANSLATE_CACHE_DIR", "./cache/")
 
 
 class Translate(object):

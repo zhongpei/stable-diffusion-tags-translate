@@ -2,7 +2,7 @@ import os
 from translate import Translate
 
 
-def translate(tag_type=None, output_file="./data/zh-CN.txt"):
+def translate(tag_type=None):
     tags = []
     with open("./tags/danbooru.csv", encoding="UTF-8") as f:
         lines = f.readlines()
