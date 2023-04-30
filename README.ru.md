@@ -21,7 +21,7 @@
 -   `zh-CN.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
 -   `zh-CN-min.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (небольшой файл для быстрого запуска)
-    -   пожалуйста, переименуйте в`zh-CN.txt`
+    -   please rename to `zh-CN.txt`
 -   `danbooru-zh-CN.csv`для[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
 
 ## языки поддержки гугл переводчик
@@ -166,7 +166,7 @@ t.save_cache()
 t.dump_cache()
 ```
 
-## пример
+## пример 1
 
 -   перевести теги из`en`к`zh-cn`
 -   `zh-CN.txt`для booru_dataset_tag_manager_translate
@@ -175,4 +175,26 @@ t.dump_cache()
 ```bash
 mkdir data
 python booru_translate.py
+```
+
+## пример 2
+
+-   перевести данные gpt из`en`к`zh-cn`
+-   сравнение\_gpt4_data_en.json
+
+```bash
+# install requirements
+pip install -r requirements.txt
+
+# make data dir
+mkdir -p ./data
+cp comparison_gpt4_data_en.json ./data/comparison_gpt4_data_en.json
+
+# make cache dir
+mkdir -p ./cache.gpt4/en_zh-cn/txt
+mkdir -p ./cache.gpt4/en_zh-cn/csv
+
+# use  proxy and cache
+TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+
 ```
