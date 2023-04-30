@@ -19,7 +19,7 @@
 ダウンロード[中国語翻訳タグ(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
 
 -   `zh-CN.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
--   `zh-CN-min.txt` for [BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+-   `zh-CN-min.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (高速起動用の小さなファイル)
     -   に改名してください`zh-CN.txt`
 -   `danbooru-zh-CN.csv`ために[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
@@ -166,7 +166,7 @@ t.save_cache()
 t.dump_cache()
 ```
 
-## 例
+## 例 1
 
 -   タグを翻訳`en`に`zh-cn`
 -   `zh-CN.txt`booru_dataset_tag_manager_translate の場合
@@ -175,4 +175,26 @@ t.dump_cache()
 ```bash
 mkdir data
 python booru_translate.py
+```
+
+## 例 2
+
+-   から gpt データを変換する`en`に`zh-cn`
+-   comparison_gpt4_data_en.json
+
+```bash
+# install requirements
+pip install -r requirements.txt
+
+# make data dir
+mkdir -p ./data
+cp comparison_gpt4_data_en.json ./data/comparison_gpt4_data_en.json
+
+# make cache dir
+mkdir -p ./cache.gpt4/en_zh-cn/txt
+mkdir -p ./cache.gpt4/en_zh-cn/csv
+
+# use  proxy and cache
+TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+
 ```
