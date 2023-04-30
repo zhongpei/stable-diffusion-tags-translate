@@ -1,6 +1,6 @@
 # 安定拡散タグ翻訳
 
-安定した拡散タグを翻訳する
+安定拡散プロンプトタグを翻訳する
 
 [中文](README.zh-CN.md)｜[英語](README.md)｜[日本語](README.ja.md)｜[ロシア](README.ru.md)
 
@@ -11,7 +11,7 @@
 -   キャッシュファイルの手動編集をサポート (txt、csv)
     -   `txt`: 1 行 1 語で`=`
     -   `csv`: 1 行 1 語で`,`
-    -   `txt`、`csv`,グーグルキャッシュ(`json`) 併用可能
+    -   `txt`、`csv`,グーグルキャッシュ(`json`）併用可能
     -   `txt`csv や Google 翻訳のキャッシュよりも優先度が高い
 
 ## リリース
@@ -19,7 +19,7 @@
 ダウンロード[中国語翻訳タグ(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
 
 -   `zh-CN.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
--   `zh-CN-min.txt`ために[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
+-   `zh-CN-min.txt` for [BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (高速起動用の小さなファイル)
     -   に改名してください`zh-CN.txt`
 -   `danbooru-zh-CN.csv`ために[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
