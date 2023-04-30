@@ -168,7 +168,7 @@ t.dump_cache()
 ```
 
 
-## example
+## example 1
 
 * translate tags from `en` to `zh-cn`
 * `zh-CN.txt` for booru_dataset_tag_manager_translate
@@ -178,4 +178,25 @@ t.dump_cache()
 ``` bash
 mkdir data
 python booru_translate.py
+```
+
+## example 2
+* translate gpt data from `en` to `zh-cn`
+* comparison_gpt4_data_en.json
+
+```bash
+# install requirements
+pip install -r requirements.txt
+
+# make data dir
+mkdir -p ./data
+cp comparison_gpt4_data_en.json ./data/comparison_gpt4_data_en.json
+
+# make cache dir
+mkdir -p ./cache.gpt4/en_zh-cn/txt
+mkdir -p ./cache.gpt4/en_zh-cn/csv
+
+# use  proxy and cache
+TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+
 ```
