@@ -3,18 +3,21 @@ import googletrans
 import os
 import threading
 from typing import List, Dict
+import redis
 
 USE_GOOGLE_TRANSLATE = os.environ.get("USE_GOOGLE_TRANSLATE", "true").lower() == "true"
 CACHE_ROOT_PATH = os.environ.get("TRANSLATE_CACHE_DIR", "./cache/")
+USE_REDIS_CACHE = os.getenv("USE_REDIS_CACHE", "false").lower() == "true"
 
 
 class Translate(object):
-
     def __init__(
             self,
             src="en",
             dest="zh-cn",
-            enable_google_translate=USE_GOOGLE_TRANSLATE
+            enable_google_translate=USE_GOOGLE_TRANSLATE,
+            redis_host_port="127.0.0.1:6379",
+
     ):
         self.lang_dir = os.path.join(CACHE_ROOT_PATH, f"{src}_{dest}")
         if not os.path.exists(self.lang_dir):
@@ -33,10 +36,22 @@ class Translate(object):
         self.google_cache_changed = False
         self.lang_src = src
         self.lang_dest = dest
+
+        self.redis_key = os.path.split(CACHE_ROOT_PATH)[-1]
+        self.redis = self.redis_host = self.redis_port = None
+        if redis_host_port is not None:
+            self.redis_host, self.redis_port = redis_host_port.split(":")
+            self.redis_port = int(self.redis_port)
+
         self.lock = threading.Lock()
         self.cache = {}
         self.google_cache = self._load_google_cache()
         self.cache.update(self.google_cache)
+
+        if USE_REDIS_CACHE:
+            self.redis = redis.Redis(host=self.redis_host, port=self.redis_port)
+            self.cache.update(self._load_redis_cache())
+
         self.cache.update(self._load_csv_cache())
         self.cache.update(self._load_txt_cache())
 
@@ -50,6 +65,9 @@ class Translate(object):
             if k != v:
                 new_cache.update({k.strip(): v.strip()})
         return new_cache
+
+    def _load_redis_cache(self):
+        return self.redis.hgetall(self.redis_key)
 
     def _load_google_cache(self):
 
@@ -172,10 +190,15 @@ class Translate(object):
 
         result = self.google_translate(txt, self.lang_src, self.lang_dest)
         if result is not None:
+
+            if self.redis is not None:
+                self.redis.hset(self.redis_key, mapping={txt: result})
+
             with self.lock:
                 self.cache.update({txt: result})
                 self.google_cache.update({txt: result})
                 self.google_cache_changed = True
+
         return result
 
     def dump_cache(self, indent=4) -> str:
@@ -184,6 +207,9 @@ class Translate(object):
     def save_cache(self):
         if not self.google_cache_changed:
             return
+
+        if self.redis is not None:
+            self.redis.hset(self.redis_key, mapping=self.google_cache)
 
         with self.lock:
             with open(self.google_cache_file, "w+", encoding="UTF-8") as f:

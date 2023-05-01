@@ -27,7 +27,7 @@ def translate_json():
             }
         )
         translate_count += 1
-        
+
         if translate_count % 100 == 0:
             translator.save_cache()
 
@@ -37,9 +37,5 @@ def translate_json():
 
 
 if __name__ == "__main__":
-    while True:
-        try:
-            translate_json()
-        except Exception as e:
-            print(e)
-            time.sleep(60)
+    translate_json()
+
