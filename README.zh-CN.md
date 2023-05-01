@@ -11,7 +11,7 @@
 -   支持手动编辑缓存文件(txt,csv)
     -   `txt`: 一行一个字`=`
     -   `csv`: 一行一个字`,`
-    -   `txt`,`csv`,谷歌缓存(`json`) 可以一起使用
+    -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
     -   `txt`优先级高于 csv 和谷歌翻译缓存
 
 ## 发布
@@ -166,7 +166,7 @@ t.save_cache()
 t.dump_cache()
 ```
 
-## 例子
+## 示例 1
 
 -   翻译标签来自`en`到`zh-cn`
 -   `zh-CN.txt`对于 booru_dataset_tag_manager_translate
@@ -175,4 +175,26 @@ t.dump_cache()
 ```bash
 mkdir data
 python booru_translate.py
+```
+
+## 示例 2
+
+-   从翻译gpt数据`en`到`zh-cn`
+-   comparison_gpt4_data_en.json
+
+```bash
+# install requirements
+pip install -r requirements.txt
+
+# make data dir
+mkdir -p ./data
+cp comparison_gpt4_data_en.json ./data/comparison_gpt4_data_en.json
+
+# make cache dir
+mkdir -p ./cache.gpt4/en_zh-cn/txt
+mkdir -p ./cache.gpt4/en_zh-cn/csv
+
+# use  proxy and cache
+TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+
 ```
