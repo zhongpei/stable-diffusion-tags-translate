@@ -2,6 +2,7 @@ import json
 from translate import Translate
 import time
 
+
 def translate_json():
     translator = Translate(src="en", dest="zh-cn")
 
@@ -12,6 +13,7 @@ def translate_json():
     count = 0
     translate_count = 0
     content_zh = []
+
     for c in content:
         instruction = c.get("instruction", "")
         output = c.get("output", ["", ])
@@ -24,8 +26,10 @@ def translate_json():
                 "output": output_zh,
             }
         )
-
-        translator.save_cache()
+        translate_count += 1
+        
+        if translate_count % 100 == 0:
+            translator.save_cache()
 
     with open("./data/comparison_gpt4_data_zh.json", "w+", encoding="UTF-8") as f:
         f.write(json.dumps(content_zh, ensure_ascii=False))
@@ -39,4 +43,3 @@ if __name__ == "__main__":
         except Exception as e:
             print(e)
             time.sleep(60)
-
