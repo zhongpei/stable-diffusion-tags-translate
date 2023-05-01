@@ -21,7 +21,7 @@
 -   `zh-CN.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
 -   `zh-CN-min.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
     -   (небольшой файл для быстрого запуска)
-    -   please rename to `zh-CN.txt`
+    -   пожалуйста, переименуйте в`zh-CN.txt`
 -   `danbooru-zh-CN.csv`для[a1111-sd-webui-tagcomplete](https://github.com/DominikDoom/a1111-sd-webui-tagcomplete)
 
 ## языки поддержки гугл переводчик
@@ -146,7 +146,7 @@
 
 ## Применение
 
-транслайте.по
+translate.py
 
 ```python
 from translate import Translate
