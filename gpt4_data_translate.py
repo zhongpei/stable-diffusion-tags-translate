@@ -10,7 +10,7 @@ def translate_json():
         content = json.load(f)
     print(f"Loaded {len(content)} gpt4")
 
-    count = 0
+    count = len(content)
     translate_count = 0
     content_zh = []
 
@@ -28,14 +28,14 @@ def translate_json():
         )
         translate_count += 1
 
-        if translate_count % 100 == 0:
+        if translate_count % 1000 == 0:
+            print(f"Translated {translate_count} / {count}")
             translator.save_cache()
 
     with open("./data/comparison_gpt4_data_zh.json", "w+", encoding="UTF-8") as f:
-        f.write(json.dumps(content_zh, ensure_ascii=False))
+        f.write(json.dumps(content_zh, ensure_ascii=False, indent=4))
     print(f"\n\nTranslated {translate_count} , {count - translate_count} failed. (Total {count} )")
 
 
 if __name__ == "__main__":
     translate_json()
-

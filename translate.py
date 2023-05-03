@@ -4,6 +4,7 @@ import os
 import threading
 from typing import List, Dict
 import redis
+import sys, traceback
 
 USE_GOOGLE_TRANSLATE = os.environ.get("USE_GOOGLE_TRANSLATE", "true").lower() == "true"
 CACHE_ROOT_PATH = os.environ.get("TRANSLATE_CACHE_DIR", "./cache/")
@@ -44,19 +45,24 @@ class Translate(object):
             self.redis_port = int(self.redis_port)
 
         self.lock = threading.Lock()
-        self.cache = {}
+        self.cache = {"": ""}
         self.google_cache = self._load_google_cache()
         self.cache.update(self.google_cache)
 
+        print(f"Using redis cache: {USE_REDIS_CACHE}")
+
         if USE_REDIS_CACHE:
             self.redis = redis.Redis(host=self.redis_host, port=self.redis_port)
-            self.cache.update(self._load_redis_cache())
+            redis_result = self._load_redis_cache()
+            print(f"Loaded {len(redis_result)} translations from redis")
+
+            self.cache.update(redis_result)
 
         self.cache.update(self._load_csv_cache())
         self.cache.update(self._load_txt_cache())
 
         # self.cache = self._fix_cache(self.cache)
-        print(f"Loaded {len(self.cache)} translations")
+        print(f"Loaded {len(self.cache)} translations cache")
 
     @staticmethod
     def _fix_cache(cache: Dict[str, str]) -> Dict[str, str]:
@@ -67,7 +73,10 @@ class Translate(object):
         return new_cache
 
     def _load_redis_cache(self):
-        return self.redis.hgetall(self.redis_key)
+        data = self.redis.hgetall(self.redis_key)
+
+        rdict = {k.decode("utf8"): v.decode("utf8") for k, v in data.items()}
+        return rdict
 
     def _load_google_cache(self):
 
@@ -124,7 +133,7 @@ class Translate(object):
         print(f"Loaded {len(cache)} translations from txt files")
         return cache
 
-    def google_translate(self, txt: str | List[str], src="en", dest="zh-cn") -> str | List[str] | None:
+    def google_translate(self, txt: str, src="en", dest="zh-cn") -> str | List[str] | None:
 
         if not self.enable_google_translate:
             return None
@@ -136,14 +145,13 @@ class Translate(object):
             return ""
 
         try:
+            # print(f"google: {txt} {src} {dest}")
             result = self.translator.translate(txt, src=src, dest=dest)
-            if isinstance(result, list):
-                rlist = [r.text for r in result]
-                [print(f"google: {txt[i]} -> {rlist[i]}") for i in range(len(rlist))]
-                return rlist
-            print(f"google: {txt} -> {result.text}")
+
+            print(f"google text: {txt} -> {result.text}")
             return result.text
         except Exception as e:
+            traceback.print_exc(file=sys.stdout)
             print(e)
             return None
 
@@ -155,33 +163,8 @@ class Translate(object):
             return None
 
         if isinstance(txt, list):
-            return self._translate_list(txt)
+            return [self._translate(t) for t in txt]
         return self._translate(txt)
-
-    def _translate_list(self, txt_list: List[str]) -> List[str] | None:
-        txt_list = [self._fix_tags(txt) for txt in txt_list]
-
-        result_dict = {}
-        result_dict.update({txt: self.cache[txt] for txt in txt_list if txt in self.cache})
-
-        need_translate = [txt for txt in txt_list if txt not in self.cache]
-        translate_result = self.google_translate(need_translate, self.lang_src, self.lang_dest)
-        print(f"google translate result: {translate_result}, need: {need_translate}")
-        if translate_result is not None:
-            if len(translate_result) != len(need_translate):
-                print(f"translate result length not match: {len(translate_result)} != {len(need_translate)}")
-                return [result_dict[txt] for txt in txt_list]
-            result_dict.update({need_translate[i]: translate_result[i] for i in range(len(translate_result))})
-
-            with self.lock:
-                print(f"update cache {len(result_dict)}")
-                self.cache.update(result_dict)
-                self.google_cache.update(result_dict)
-                self.google_cache_changed = True
-        else:
-            result_dict.update({txt: None for txt in need_translate})
-
-        return [result_dict[txt] for txt in txt_list]
 
     def _translate(self, txt: str) -> str | None:
         txt = self._fix_tags(txt)
@@ -220,7 +203,7 @@ class Translate(object):
 
 if __name__ == '__main__':
     t = Translate('en', 'zh-cn')
-    print(t.translate("1girl"))
-    print(t.translate("hello"))
-    print(t.translate(["hello world", "say goodbye"]))
+    # print(t.translate("1girl"))
+    # print(t.translate("hello"))
+    print(t.translate(["hello world jj", "say goodbye"]))
     t.save_cache()
