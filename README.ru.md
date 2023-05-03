@@ -146,7 +146,7 @@
 
 ## Применение
 
-translate.py
+транслайте.по
 
 ```python
 from translate import Translate
