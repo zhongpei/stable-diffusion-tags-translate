@@ -6,12 +6,13 @@
 
 -   グーグル翻訳を使って
     -   結果をキャッシュする`json`ファイル
+    -   結果をredisにキャッシュする
 -   マルチスレッドをサポート
 -   多くの言語をサポート
 -   キャッシュファイルの手動編集をサポート (txt、csv)
     -   `txt`: 1 行 1 語で`=`
     -   `csv`: 1 行 1 語で`,`
-    -   `txt`、`csv`,グーグルキャッシュ(`json`）併用可能
+    -   `txt`、`csv`,グーグルキャッシュ(`json`) 併用可能
     -   `txt`csv や Google 翻訳のキャッシュよりも優先度が高い
 
 ## リリース
@@ -166,6 +167,22 @@ t.save_cache()
 t.dump_cache()
 ```
 
+### 偶数
+
+-   TRANSLATE_CACHE_DIR
+    -   キャッシュディレクトリ名
+    -   デフォルト：`./cache`
+    -   redis キャッシュを使用する場合、これは redis ハッシュのキーです
+-   USE_REDIS_CACHE
+    -   `true`変換キャッシュに redis を使用する
+    -   1000 以上のタグを翻訳するには、redis キャッシュをお勧めします
+    -   デフォルトのホスト:`localhost`ポート：`6379`
+    -   パラメータ`Translate('en', 'zh-cn',redis_host_port="1.1.1.1:6300")`
+-   USE_GOOGLE_TRANSLATE
+    -   `true`グーグル翻訳を使う
+    -   `false`Google 翻訳を無効にしてキャッシュのみを使用する
+    -   パラメータ`Translate('en', 'zh-cn',use_google_translate=False)`
+
 ## 例 1
 
 -   タグを翻訳`en`に`zh-cn`
@@ -195,6 +212,6 @@ mkdir -p ./cache.gpt4/en_zh-cn/txt
 mkdir -p ./cache.gpt4/en_zh-cn/csv
 
 # use  proxy and cache
-TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+TRANSLATE_CACHE_DIR=./cache.gpt4 USE_REDIS_CACHE=true all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
 
 ```
