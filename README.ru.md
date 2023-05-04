@@ -1,11 +1,12 @@
 # стабильная-диффузия-теги-перевести
 
-перевести теги стабильной диффузии
+tanslate stable diffusion prompt tags
 
 [Китайский](README.zh-CN.md)\|[Английский](README.md)\|[Японский](README.ja.md)\|[Русский](README.ru.md)
 
 -   с помощью гугл переводчика
     -   кэшировать результат в`json`файл
+    -   кешировать результат в Redis
 -   поддержка многопоточности
 -   поддержка многих языков
 -   поддержка редактирования файла кеша вручную (txt, csv)
@@ -16,7 +17,7 @@
 
 ## Релизы
 
-Скачать[Китайские теги перевода(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
+Скачать[Chinese translate tags(40K+)](https://github.com/zhongpei/stable-diffusion-tags-translate/releases/tag/v1.0)
 
 -   `zh-CN.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
 -   `zh-CN-min.txt`для[BooruDatasetTagManager](https://github.com/starik222/BooruDatasetTagManager)
@@ -166,6 +167,22 @@ t.save_cache()
 t.dump_cache()
 ```
 
+### даже
+
+-   TRANSLATE_CACHE_DIR
+    -   имя каталога кеша
+    -   по умолчанию:`./cache`
+    -   при использовании кеша redis это ключ хэша redis
+-   USE_REDIS_CACHE
+    -   `true` use redis for translate cache
+    -   перевести более 1000 тегов, рекомендуется кэш Redis
+    -   хост по умолчанию:`localhost`порт:`6379`
+    -   параметр`Translate('en', 'zh-cn',redis_host_port="1.1.1.1:6300")`
+-   ИСПОЛЬЗОВАТЬ GOOGLE TRANSLATE
+    -   `true`Используйте Гугл переводчик
+    -   `false` disable google translate only use cache
+    -   параметр`Translate('en', 'zh-cn',use_google_translate=False)`
+
 ## пример 1
 
 -   перевести теги из`en`к`zh-cn`
@@ -195,6 +212,6 @@ mkdir -p ./cache.gpt4/en_zh-cn/txt
 mkdir -p ./cache.gpt4/en_zh-cn/csv
 
 # use  proxy and cache
-TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+TRANSLATE_CACHE_DIR=./cache.gpt4 USE_REDIS_CACHE=true all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
 
 ```
