@@ -6,12 +6,13 @@
 
 -   使用谷歌翻译
     -   将结果缓存在`json`文件
+    -   将结果缓存到redis
 -   支持多线程
 -   支持多种语言
 -   支持手动编辑缓存文件(txt,csv)
     -   `txt`: 一行一个字`=`
     -   `csv`: 一行一个字`,`
-    -   `txt`,`csv`，谷歌缓存（`json`) 可以一起使用
+    -   `txt`,`csv`,谷歌缓存(`json`) 可以一起使用
     -   `txt`优先级高于 csv 和谷歌翻译缓存
 
 ## 发布
@@ -166,6 +167,22 @@ t.save_cache()
 t.dump_cache()
 ```
 
+### 伊夫
+
+-   翻译缓存目录
+    -   缓存目录名称
+    -   默认：`./cache`
+    -   使用redis缓存时，这是redis hash的key
+-   USE_REDIS_CACHE
+    -   `true`使用 redis 进行翻译缓存
+    -   翻译超过1000个标签，推荐使用redis缓存
+    -   默认主机：`localhost`港口：`6379`
+    -   参数`Translate('en', 'zh-cn',redis_host_port="1.1.1.1:6300")`
+-   使用谷歌翻译
+    -   `true`使用谷歌翻译
+    -   `false`禁用谷歌翻译只使用缓存
+    -   参数`Translate('en', 'zh-cn',use_google_translate=False)`
+
 ## 示例 1
 
 -   翻译标签来自`en`到`zh-cn`
@@ -195,6 +212,6 @@ mkdir -p ./cache.gpt4/en_zh-cn/txt
 mkdir -p ./cache.gpt4/en_zh-cn/csv
 
 # use  proxy and cache
-TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+TRANSLATE_CACHE_DIR=./cache.gpt4 USE_REDIS_CACHE=true all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
 
 ```
