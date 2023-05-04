@@ -7,6 +7,7 @@ tanslate stable diffusion prompt tags
 
 * using google translate
     * cache the result in `json` file
+    * cache the result in redis
 * support multi-threading
 * support many languages
 * support edit cache file manually(txt,csv)
@@ -167,6 +168,22 @@ t.save_cache()
 t.dump_cache()
 ```
 
+### evn
+
+* TRANSLATE_CACHE_DIR
+  * cache dir name
+  * default: `./cache`
+  * whe use redis cache, this is the key of redis hash
+* USE_REDIS_CACHE
+  * `true` use redis for translate cache
+  * translate more than 1000 tags, redis cache is recommended
+  * default host: `localhost` port: `6379`
+  * param  `Translate('en', 'zh-cn',redis_host_port="1.1.1.1:6300")`
+* USE_GOOGLE_TRANSLATE
+  * `true` use google translate
+  * `false` disable google translate only use cache
+  * param `Translate('en', 'zh-cn',use_google_translate=False)`
+  
 
 ## example 1
 
@@ -197,6 +214,6 @@ mkdir -p ./cache.gpt4/en_zh-cn/txt
 mkdir -p ./cache.gpt4/en_zh-cn/csv
 
 # use  proxy and cache
-TRANSLATE_CACHE_DIR=./cache.gpt4 all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
+TRANSLATE_CACHE_DIR=./cache.gpt4 USE_REDIS_CACHE=true all_proxy="http://127.0.0.1:6152" python gpt4_data_translate.py
 
 ```
